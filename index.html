@@ -1,12 +1,156 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>logo google</title>
-    <link rel="stylesheet" href="./styles/styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="MarkLab is an educational HTML/CSS geometry playground that reconstructs a multicolor G-shaped mark without SVG, canvas, or image assets."
+  >
+  <meta name="color-scheme" content="light dark">
+  <title>MarkLab — CSS Geometry Reconstruction Lab</title>
+  <link rel="stylesheet" href="./assets/style.css">
 </head>
 <body>
-    <div class="logo"></div>
+  <a class="skip-link" href="#workspace">Skip to workspace</a>
+
+  <header class="site-header">
+    <div>
+      <p class="eyebrow">HTML + CSS geometry study</p>
+      <h1>MarkLab</h1>
+      <p class="subtitle">
+        An educational reconstruction lab for a multicolor G-shaped mark using only HTML and CSS.
+        Adjust the geometry, inspect the math, and copy the generated CSS variables.
+      </p>
+    </div>
+    <div class="disclaimer">
+      Unofficial educational exercise. No affiliation with Google.
+    </div>
+  </header>
+
+  <main id="workspace" class="workspace">
+    <section class="preview-panel" aria-labelledby="preview-title">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Preview</p>
+          <h2 id="preview-title">Live geometry</h2>
+        </div>
+        <button id="reset" class="secondary-button" type="button">Reset</button>
+      </div>
+
+      <div class="mark-canvas" data-canvas="paper">
+        <div class="guide guide-x" aria-hidden="true"></div>
+        <div class="guide guide-y" aria-hidden="true"></div>
+
+        <div
+          class="g-mark"
+          role="img"
+          aria-label="Unofficial multicolor G-shaped logo reconstruction made with CSS borders and pseudo-elements"
+        ></div>
+      </div>
+    </section>
+
+    <section class="controls-panel" aria-labelledby="controls-title">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Controls</p>
+          <h2 id="controls-title">Tune the shape</h2>
+        </div>
+      </div>
+
+      <div class="control-list">
+        <label class="control-row" for="size">
+          <span>Overall size</span>
+          <strong data-size-value>240px</strong>
+          <input id="size" type="range" value="240">
+        </label>
+
+        <label class="control-row" for="stroke">
+          <span>Stroke</span>
+          <strong data-stroke-value>44px</strong>
+          <input id="stroke" type="range" value="44">
+        </label>
+
+        <label class="select-row" for="canvas">
+          <span>Canvas</span>
+          <select id="canvas">
+            <option value="paper">Paper</option>
+            <option value="ink">Ink</option>
+            <option value="warm">Warm</option>
+          </select>
+        </label>
+
+        <label class="toggle-row" for="guides">
+          <span>
+            <strong>Geometry guides</strong>
+            <small>Show the vertical and horizontal center lines.</small>
+          </span>
+          <input id="guides" type="checkbox">
+        </label>
+      </div>
+
+      <dl class="metrics">
+        <div>
+          <dt>Inner diameter</dt>
+          <dd data-inner-value>152px</dd>
+        </div>
+        <div>
+          <dt>Stroke ratio</dt>
+          <dd data-ratio-value>18.3%</dd>
+        </div>
+      </dl>
+    </section>
+
+    <section class="code-panel" aria-labelledby="code-title">
+      <div class="panel-heading">
+        <div>
+          <p class="eyebrow">Generated output</p>
+          <h2 id="code-title">CSS variables</h2>
+        </div>
+        <button id="copy-css" class="secondary-button" type="button">Copy CSS</button>
+      </div>
+
+      <pre><code id="css-output"></code></pre>
+      <p class="code-note">
+        The mark itself uses no SVG, canvas, inline image, or JavaScript drawing API.
+        JavaScript only changes CSS custom properties and interface state.
+      </p>
+    </section>
+
+    <section class="explain-panel" aria-labelledby="explain-title">
+      <div>
+        <p class="eyebrow">Technique</p>
+        <h2 id="explain-title">Why this works</h2>
+      </div>
+
+      <div class="explain-grid">
+        <article>
+          <strong>01 / Ring</strong>
+          <p>A circular element uses four different border colors to create the segmented outer ring.</p>
+        </article>
+        <article>
+          <strong>02 / Cutout</strong>
+          <p>A pseudo-element masks part of the right side using the current canvas color.</p>
+        </article>
+        <article>
+          <strong>03 / Crossbar</strong>
+          <p>A second pseudo-element draws the horizontal blue bar that completes the G-like silhouette.</p>
+        </article>
+        <article>
+          <strong>04 / Constraints</strong>
+          <p>The control model clamps size and stroke so the construction stays geometrically valid.</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <p class="sr-only" data-status aria-live="polite"></p>
+
+  <footer>
+    <span>MarkLab</span>
+    <span>HTML · CSS Custom Properties · Vanilla JavaScript · Node tests</span>
+  </footer>
+
+  <script type="module" src="./assets/main.js"></script>
 </body>
 </html>
